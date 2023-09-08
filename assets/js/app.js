@@ -9,3 +9,14 @@
 // If question answered incorrectly time subtracted from clock.
 
 // Form element to output score.
+
+// Generate questions in ordered list.
+const answerOL = document.querySelector('#answers');
+
+const answers = [1, 2, 3, 4]
+
+for (i = 0; i < 4; i++) {
+    let newLI = document.createElement('li');
+    newLI.innerText = answers[i];
+    answerOL.appendChild(newLI);
+}
