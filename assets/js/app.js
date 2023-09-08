@@ -10,13 +10,27 @@
 
 // Form element to output score.
 
-// Generate questions in ordered list.
+// Questions and their answers can be placed in arrays.
+const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
+
+
+// This section establishes variables for use in the functions. A variable for the ordered list to be called in the questionGen function to append child list items.
 const answerOL = document.querySelector('#answers');
 
-const answers = [1, 2, 3, 4]
+const questionTxt = document.querySelector('#question-txt')
+
+// This function will generate an ordered list using the question arrays.
+const questionGen = () => {
+questionTxt.innerHTML = q1[0];
 
 for (i = 0; i < 4; i++) {
     let newLI = document.createElement('li');
-    newLI.innerText = answers[i];
+    let newBtn = document.createElement('button')
+    // newLI.innerText = q1[i + 1];
     answerOL.appendChild(newLI);
+    newLI.append(newBtn);
+    newBtn.innerText = q1[i + 1];
 }
+}
+
+questionGen();
