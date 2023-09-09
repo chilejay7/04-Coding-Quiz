@@ -1,14 +1,36 @@
 header {
     display: flex;
     justify-content: space-between;
+    font-size: 1rem;
 }
 
 a {
     padding-top: 10px;
 }
 
-li {
-    font-weight: bold;
-    margin: 10px 0;
+/* #timer {
+    font-size: 1.5rem;
+} */
+
+h1 {
+    font-size: 2rem;
 }
 
+#answers {
+    font-size: 1.5rem;
+}
+
+.li-answer {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.buttons {
+    background-color: cyan;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.buttons:hover {
+    background-color: white;
+}
