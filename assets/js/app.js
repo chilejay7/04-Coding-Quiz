@@ -10,8 +10,10 @@
 
 // Form element to output score.
 
-// Questions and their answers can be placed in arrays.
+// Questions and their answers can be placed in arrays. The question will always use the index of 0.
 const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
+
+const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
 
 
 // This section establishes variables for use in the functions. A variable for the ordered list to be called in the questionGen function to append child list items.
@@ -19,18 +21,36 @@ const answerOL = document.querySelector('#answers');
 
 const questionTxt = document.querySelector('#question-txt')
 
-// This function will generate an ordered list using the question arrays.
-const questionGen = () => {
-questionTxt.innerHTML = q1[0];
+const numQuestions = 2
 
-for (i = 0; i < 4; i++) {
-    let newLI = document.createElement('li');
-    let newBtn = document.createElement('button')
-    // newLI.innerText = q1[i + 1];
-    answerOL.appendChild(newLI);
-    newLI.append(newBtn);
-    newBtn.innerText = q1[i + 1];
+let randomizeQst = () => {
+    let rand = Math.floor(Math.random() * numQuestions + 1);
+    // randomQ = `q${rand}`;
+    if (rand === 2) {
+        randomQ = q2
+    } else {
+        randomQ = q1
+    }
+    return randomQ;
 }
+
+// This function will generate an ordered list using the question arrays.
+questionGen = () => {
+    randomizeQst();
+    questionTxt.innerHTML = randomQ[0];
+    console.log(randomQ)
+
+    for (i = 0; i < 4; i++) {
+            let newLI = document.createElement('li');
+            let newBtn = document.createElement('button')
+            // newLI.innerText = q1[i + 1];
+            answerOL.appendChild(newLI);
+            newLI.setAttribute('class', 'li-answer')
+            newLI.appendChild(newBtn);
+            newBtn.innerText = randomQ[i + 1];
+            newBtn.setAttribute('class', 'buttons');
+        }
 }
 
 questionGen();
+console.log(click)
