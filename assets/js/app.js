@@ -2,7 +2,11 @@
 
 // Start button that triggers a countdown event with interval.  Game ends when clock reaches 0 or there aren't any addtional questions.  Click listener needed for Start button that triggers interval function.
 
+const startQuiz = document.querySelector('#start-btn');
 
+startQuiz.addEventListener('click', function() {
+    console.log("You started the quiz!");
+})
 
 
 // Generate random questions.  Four potential answers with buttons to select answer.  This should probably be an ol to generate the four button elements with possible answers.
@@ -20,6 +24,7 @@ const q2 = ['Which method would we use to add a class to a newly created element
 
 const numQuestions = 2
 
+// This function randomizes the question selected based on the arrays above.
 let randomizeQst = () => {
     // let liDel = document.querySelectorAll('li').remove();
     let rand = Math.floor(Math.random() * numQuestions + 1);
