@@ -3,9 +3,12 @@
 // Start button that triggers a countdown event with interval.  Game ends when clock reaches 0 or there aren't any addtional questions.  Click listener needed for Start button that triggers interval function.
 
 const startQuiz = document.querySelector('#start-btn');
+const introParagraph = document.querySelector('#intro')
 
 startQuiz.addEventListener('click', function() {
     console.log("You started the quiz!");
+    startQuiz.remove() & introParagraph.remove();
+    questionGen();
 })
 
 
