@@ -2,6 +2,9 @@
 
 // Start button that triggers a countdown event with interval.  Game ends when clock reaches 0 or there aren't any addtional questions.  Click listener needed for Start button that triggers interval function.
 
+
+
+
 // Generate random questions.  Four potential answers with buttons to select answer.  This should probably be an ol to generate the four button elements with possible answers.
 
 // Answering question triggers next question.
@@ -15,15 +18,10 @@ const q1 = ['What is the difference between an ol and ul element?', 'Nothing the
 
 const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
 
-
-// This section establishes variables for use in the functions. A variable for the ordered list to be called in the questionGen function to append child list items.
-const answerOL = document.querySelector('#answers');
-
-const questionTxt = document.querySelector('#question-txt')
-
 const numQuestions = 2
 
 let randomizeQst = () => {
+    // let liDel = document.querySelectorAll('li').remove();
     let rand = Math.floor(Math.random() * numQuestions + 1);
     // randomQ = `q${rand}`;
     if (rand === 2) {
@@ -34,12 +32,18 @@ let randomizeQst = () => {
     return randomQ;
 }
 
+// This section establishes variables for use in the functions. A variable for the ordered list to be called in the questionGen function to append child list items.
+const answerOL = document.querySelector('#answers');
+
+const questionTxt = document.querySelector('#question-txt')
+
 // This function will generate an ordered list using the question arrays.
 questionGen = () => {
     randomizeQst();
     questionTxt.innerHTML = randomQ[0];
     console.log(randomQ)
 
+// This needs to be debugged.  It generates random questions, but appeneds the answers in a growing list.  The list elements need to be rewritten.  
     for (i = 0; i < 4; i++) {
             let newLI = document.createElement('li');
             let newBtn = document.createElement('button')
@@ -52,5 +56,4 @@ questionGen = () => {
         }
 }
 
-questionGen();
-console.log(click)
+// questionGen();

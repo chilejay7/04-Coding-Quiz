@@ -14,6 +14,21 @@ a {
 
 h1 {
     font-size: 2rem;
+    text-align: center;
+}
+
+p {
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+#start-btn {
+  align-items: center;
+  background-color: red;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: 2px solid black;
+  margin-left: 50%;
 }
 
 #answers {
