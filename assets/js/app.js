@@ -5,6 +5,7 @@
 const startQuiz = document.querySelector('#start-btn');
 const introParagraph = document.querySelector('#intro')
 const timerDisplay = document.querySelector('#timer');
+const docMain = document.querySelector('main')
 
 let timeLeft = 5;
 
@@ -90,4 +91,15 @@ questionGen = () => {
 gameOver = () => {
     answerOL.remove();
     questionTxt.innerHTML = 'Sorry, the quiz is over.'
+    let newForm = document.createElement('form');
+    let newInput = document.createElement('input');
+    let newLabel = document.createElement('label')
+    docMain.appendChild(newForm);
+    docMain.appendChild(newLabel);
+    docMain.appendChild(newInput);
+    newLabel.innerText = 'Initials and Final Score'
+    newLabel.setAttribute('for', 'initials-score');
+    newInput.setAttribute('type', 'text');
+    newInput.setAttribute('id', 'initials-score');
+    
 }
