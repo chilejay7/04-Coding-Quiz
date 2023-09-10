@@ -6,6 +6,7 @@ header {
 
 a {
     padding-top: 10px;
+    font-size: 1.25rem;
 }
 
 /* #timer {
@@ -28,13 +29,17 @@ p {
     flex-basis: 20%;
 }
 
+#span-time {
+    color: red;
+}
+
 #start-btn {
   align-items: center;
-  background-color: red;
+  background-color: #00ccffd8;
   font-size: 1.25rem;
   font-weight: bold;
   border: 2px solid black;
-  margin-left: 50%;
+  margin-left: 48%;
 }
 
 #answers {

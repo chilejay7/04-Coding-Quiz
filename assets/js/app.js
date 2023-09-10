@@ -6,7 +6,7 @@ const startQuiz = document.querySelector('#start-btn');
 const introParagraph = document.querySelector('#intro')
 const timerDisplay = document.querySelector('#timer');
 
-let timeLeft = 60;
+let timeLeft = 5;
 
 function timerCountdown() {
         let countdownInterval = setInterval(function() {
@@ -14,15 +14,18 @@ function timerCountdown() {
         timeLeft--;
         timerDisplay.innerHTML = `Timer: ${timeLeft}`;
 
+        // An or statement can be added here if all questions have been answered.
         if (timeLeft === 0) {
             clearInterval(countdownInterval);
             console.log('Time is up!')
+            gameOver();
         } else { 
             console.log('Keep going!')
         }
     }, 1000);
 }
 
+//This function triggers when the start button is clicked.  It will remove the start button (id of startQuiz) and the introductory paragraph (id of introParagraph) from the document, allowing only the quetsion and answers to be displayed.  It also triggers the countdown timer and question generator.
 
 startQuiz.addEventListener('click', function() {
     console.log("You started the quiz!");
@@ -31,20 +34,19 @@ startQuiz.addEventListener('click', function() {
     questionGen();
 })
 
-
-// Generate random questions.  Four potential answers with buttons to select answer.  This should probably be an ol to generate the four button elements with possible answers.
-
 // Answering question triggers next question.
 
 // If question answered incorrectly time subtracted from clock.
 
 // Form element to output score.
 
-// Questions and their answers can be placed in arrays. The question will always use the index of 0.
+// Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in arrays. The actual question will always use the index of 0.
+
 const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
 
 const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
 
+// This controls the randomization.  The value needs to be updated as questions are added.
 const numQuestions = 2
 
 // This function randomizes the question selected based on the arrays above.
@@ -60,7 +62,7 @@ let randomizeQst = () => {
     return randomQ;
 }
 
-// This section establishes variables for use in the functions. A variable for the ordered list to be called in the questionGen function to append child list items.
+// This section establishes variables for use in the functions. A variable for the ordered list (answerOL) to be called in the questionGen function to append child list items.  The h1 used to display questions is also defined (questionTxt).
 const answerOL = document.querySelector('#answers');
 
 const questionTxt = document.querySelector('#question-txt')
@@ -84,4 +86,8 @@ questionGen = () => {
         }
 }
 
-// questionGen();
+//This function will trigger a message when the timer reaches zero or all questions have been exhausted.
+gameOver = () => {
+    answerOL.remove();
+    questionTxt.innerHTML = 'Sorry, the quiz is over.'
+}
