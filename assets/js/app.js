@@ -87,7 +87,7 @@ questionGen = () => {
         }
 }
 
-//This function will trigger a message when the timer reaches zero or all questions have been exhausted.
+//This function will trigger a message when the timer reaches zero or all questions have been exhausted.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
 gameOver = () => {
     answerOL.remove();
     questionTxt.innerHTML = 'Sorry, the quiz is over.'
@@ -101,5 +101,5 @@ gameOver = () => {
     newLabel.setAttribute('for', 'initials-score');
     newInput.setAttribute('type', 'text');
     newInput.setAttribute('id', 'initials-score');
-    
+    newInput.setAttribute('placeholder', 'Initials & Score');
 }

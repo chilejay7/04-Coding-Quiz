@@ -23,6 +23,18 @@ p {
     text-align: center;
 }
 
+label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding-right: 5px;
+    margin-left: 35%;
+}
+
+input {
+    border: solid black 2px;
+    font-size: 1rem;
+}
+
 #timer {
     border: 2px solid black;
     font-weight: bold;
