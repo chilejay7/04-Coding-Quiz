@@ -4,10 +4,30 @@
 
 const startQuiz = document.querySelector('#start-btn');
 const introParagraph = document.querySelector('#intro')
+const timerDisplay = document.querySelector('#timer');
+
+let timeLeft = 60;
+
+function timerCountdown() {
+        let countdownInterval = setInterval(function() {
+        console.log(timeLeft);
+        timeLeft--;
+        timerDisplay.innerHTML = `Timer: ${timeLeft}`;
+
+        if (timeLeft === 0) {
+            clearInterval(countdownInterval);
+            console.log('Time is up!')
+        } else { 
+            console.log('Keep going!')
+        }
+    }, 1000);
+}
+
 
 startQuiz.addEventListener('click', function() {
     console.log("You started the quiz!");
     startQuiz.remove() & introParagraph.remove();
+    timerCountdown();
     questionGen();
 })
 

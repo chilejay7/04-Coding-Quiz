@@ -22,6 +22,12 @@ p {
     text-align: center;
 }
 
+#timer {
+    border: 2px solid black;
+    font-weight: bold;
+    flex-basis: 20%;
+}
+
 #start-btn {
   align-items: center;
   background-color: red;
