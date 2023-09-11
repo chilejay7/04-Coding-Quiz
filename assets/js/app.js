@@ -87,7 +87,7 @@ questionGen = () => {
         }
 }
 
-//This function will trigger a message when the timer reaches zero or all questions have been exhausted.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
+// This function will trigger a message when the timer reaches zero or all questions have been exhausted.  The function is called in the if statement of the interval timer countdown function.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
 gameOver = () => {
     answerOL.remove();
     questionTxt.innerHTML = 'Sorry, the quiz is over.'
