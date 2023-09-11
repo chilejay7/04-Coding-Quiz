@@ -97,6 +97,7 @@ gameOver = () => {
     let newLabel = document.createElement('label')
     // let submitBtn = document.createElement('button');
     docMain.appendChild(newForm);
+    // newForm.setAttribute('action', '/score')
     newForm.appendChild(newLabel);
     newForm.appendChild(newInput);
     newForm.appendChild(submitBtn);
@@ -109,20 +110,16 @@ gameOver = () => {
     submitBtn.setAttribute('id', 'submit');
  }
 
-// Tracking scores.  A submit button was created in the gameOver function.  The input from the form will be captured to store in the scores array.
-let scores = [];
+// Tracking scores.  A submit button was created in the gameOver function.  The input from the form will be captured to store in the scores array.  Local storage is needed to store data in the user's browser.
 const input = document.querySelector('input')
-const scoreOL = document.querySelector('#quiz-scores')
+const scoreOL = document.getElementById('quiz-scores')
 
 submitBtn.addEventListener ('click', function(){
-    console.log(`Thanks for submitting your scores! Your score will be logged as ${input.value}`)
-
+    let scoreInput = document.getElementById('initials-score').value;
+    let newLI = document.createElement('li');
+    scoreOL.appendChild(newLI);
+    newLI.innerText = scoreInput;
+    
+    console.log(`Thanks for submitting your scores! Your score will be logged as ${scoreInput}`);
 })
-
-// input.addEventListener('input', function (e) {
-//     let newLI = document.createElement('li');
-//     newLI.innerText = input.value
-//     console.log(e);
-//     scoreOL.appendChild(newLi);
-// })
 

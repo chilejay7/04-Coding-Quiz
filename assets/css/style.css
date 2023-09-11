@@ -19,7 +19,7 @@ h1 {
 }
 
 p {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     text-align: center;
 }
 
@@ -52,6 +52,8 @@ input {
   font-weight: bold;
   border: 2px solid black;
   margin-left: 48%;
+  border-radius: 10em;
+  padding: 10px;
 }
 
 #answers {
