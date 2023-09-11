@@ -1,7 +1,5 @@
 // Create buttons in html document and add listeners.
 
-// Start button that triggers a countdown event with interval.  Game ends when clock reaches 0 or there aren't any addtional questions.  Click listener needed for Start button that triggers interval function.
-
 const startQuiz = document.querySelector('#start-btn');
 const introParagraph = document.querySelector('#intro')
 const timerDisplay = document.querySelector('#timer');
@@ -9,7 +7,7 @@ const docMain = document.querySelector('main')
 
 let timeLeft = 5;
 
-function timerCountdown() {
+timerCountdown = () => {
         let countdownInterval = setInterval(function() {
         console.log(timeLeft);
         timeLeft--;
@@ -41,6 +39,7 @@ startQuiz.addEventListener('click', function() {
 
 // Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in arrays. The actual question will always use the index of 0.
 
+// An index with the answer needs to be added to each array.
 const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
 
 const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
@@ -49,7 +48,7 @@ const q2 = ['Which method would we use to add a class to a newly created element
 const numQuestions = 2
 
 // This function randomizes the question selected based on the arrays above.
-let randomizeQst = () => {
+randomizeQst = () => {
     // let liDel = document.querySelectorAll('li').remove();
     let rand = Math.floor(Math.random() * numQuestions + 1);
     // randomQ = `q${rand}`;
@@ -110,16 +109,28 @@ gameOver = () => {
     submitBtn.setAttribute('id', 'submit');
  }
 
-// Tracking scores.  A submit button was created in the gameOver function.  The input from the form will be captured to store in the scores array.  Local storage is needed to store data in the user's browser.
+// Tracking scores.  A submit button was created in the gameOver function.  The input from the form will be captured to store in the scores array.  Local storage is needed to store data in the user's browser.  This is accomplished through the window.  A separate function will be used to retrieve it through the View High Scores link.
 const input = document.querySelector('input')
 const scoreOL = document.getElementById('quiz-scores')
+const highScores = document.getElementById('score-link')
 
 submitBtn.addEventListener ('click', function(){
     let scoreInput = document.getElementById('initials-score').value;
-    let newLI = document.createElement('li');
-    scoreOL.appendChild(newLI);
-    newLI.innerText = scoreInput;
+    // let newLI = document.createElement('li');
+    // scoreOL.appendChild(newLI);
+    // newLI.innerText = scoreInput;
+
+    window.localStorage.setItem('scores',(scoreInput));
     
     console.log(`Thanks for submitting your scores! Your score will be logged as ${scoreInput}`);
 })
+
+highScores.addEventListener ('click', function () {
+    let getScores = window.localStorage.getItem('scores');
+    console.log(getScores);
+    let newLI = document.createElement('li');
+    scoreOL.appendChild(newLI);
+    newLI.innerText = getScores;
+})
+
 
