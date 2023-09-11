@@ -87,17 +87,19 @@ questionGen = () => {
 
 // Form element to output score.
 // This function will trigger a message when the timer reaches zero or all questions have been exhausted.  The function is called in the if statement of the interval timer countdown function.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
+const submitBtn = document.createElement('button')
+
 gameOver = () => {
     answerOL.remove();
     questionTxt.innerHTML = 'Sorry, the quiz is over.'
     let newForm = document.createElement('form');
     let newInput = document.createElement('input');
     let newLabel = document.createElement('label')
-    let submitBtn = document.createElement('button');
+    // let submitBtn = document.createElement('button');
     docMain.appendChild(newForm);
-    docMain.appendChild(newLabel);
-    docMain.appendChild(newInput);
-    docMain.appendChild(submitBtn);
+    newForm.appendChild(newLabel);
+    newForm.appendChild(newInput);
+    newForm.appendChild(submitBtn);
     newLabel.innerText = 'Initials and Final Score'
     newLabel.setAttribute('for', 'initials-score');
     newInput.setAttribute('type', 'text');
@@ -105,12 +107,22 @@ gameOver = () => {
     newInput.setAttribute('placeholder', 'Initials & Score');
     submitBtn.innerText = 'Submit';
     submitBtn.setAttribute('id', 'submit');
-}
+ }
 
 // Tracking scores.  A submit button was created in the gameOver function.  The input from the form will be captured to store in the scores array.
 let scores = [];
+const input = document.querySelector('input')
+const scoreOL = document.querySelector('#quiz-scores')
 
 submitBtn.addEventListener ('click', function(){
-    console.log('Thanks for submitting your scores!')
+    console.log(`Thanks for submitting your scores! Your score will be logged as ${input.value}`)
+
 })
+
+// input.addEventListener('input', function (e) {
+//     let newLI = document.createElement('li');
+//     newLI.innerText = input.value
+//     console.log(e);
+//     scoreOL.appendChild(newLi);
+// })
 
