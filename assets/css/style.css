@@ -58,6 +58,10 @@ input {
     font-size: 1.5rem;
 }
 
+#submit {
+    margin-left: 10px;
+}
+
 .li-answer {
     margin: 10px 0;
     font-weight: bold;

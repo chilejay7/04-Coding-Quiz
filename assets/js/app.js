@@ -39,8 +39,6 @@ startQuiz.addEventListener('click', function() {
 
 // If question answered incorrectly time subtracted from clock.
 
-// Form element to output score.
-
 // Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in arrays. The actual question will always use the index of 0.
 
 const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
@@ -87,6 +85,7 @@ questionGen = () => {
         }
 }
 
+// Form element to output score.
 // This function will trigger a message when the timer reaches zero or all questions have been exhausted.  The function is called in the if statement of the interval timer countdown function.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
 gameOver = () => {
     answerOL.remove();
@@ -94,12 +93,24 @@ gameOver = () => {
     let newForm = document.createElement('form');
     let newInput = document.createElement('input');
     let newLabel = document.createElement('label')
+    let submitBtn = document.createElement('button');
     docMain.appendChild(newForm);
     docMain.appendChild(newLabel);
     docMain.appendChild(newInput);
+    docMain.appendChild(submitBtn);
     newLabel.innerText = 'Initials and Final Score'
     newLabel.setAttribute('for', 'initials-score');
     newInput.setAttribute('type', 'text');
     newInput.setAttribute('id', 'initials-score');
     newInput.setAttribute('placeholder', 'Initials & Score');
+    submitBtn.innerText = 'Submit';
+    submitBtn.setAttribute('id', 'submit');
 }
+
+// Tracking scores.  A submit button was created in the gameOver function.  The input from the form will be captured to store in the scores array.
+let scores = [];
+
+submitBtn.addEventListener ('click', function(){
+    console.log('Thanks for submitting your scores!')
+})
+
