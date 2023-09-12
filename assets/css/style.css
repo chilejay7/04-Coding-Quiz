@@ -78,3 +78,7 @@ input {
 .buttons:hover {
     background-color: white;
 }
+
+#quiz-scores li {
+    margin-left: 48%;
+}

@@ -5,7 +5,7 @@ const introParagraph = document.querySelector('#intro')
 const timerDisplay = document.querySelector('#timer');
 const docMain = document.querySelector('main')
 
-let timeLeft = 5;
+let timeLeft = 2;
 
 timerCountdown = () => {
         let countdownInterval = setInterval(function() {
@@ -114,23 +114,22 @@ const input = document.querySelector('input')
 const scoreOL = document.getElementById('quiz-scores')
 const highScores = document.getElementById('score-link')
 
+// This function adds the scores to local storage.
 submitBtn.addEventListener ('click', function(){
     let scoreInput = document.getElementById('initials-score').value;
-    // let newLI = document.createElement('li');
-    // scoreOL.appendChild(newLI);
-    // newLI.innerText = scoreInput;
-
-    window.localStorage.setItem('scores',(scoreInput));
+    localStorage.setItem('scores',(scoreInput));
     
     console.log(`Thanks for submitting your scores! Your score will be logged as ${scoreInput}`);
 })
 
+// This function will retrieve the scores from local storage.
 highScores.addEventListener ('click', function () {
-    let getScores = window.localStorage.getItem('scores');
+    let getScores = localStorage.getItem('scores');
     console.log(getScores);
     let newLI = document.createElement('li');
     scoreOL.appendChild(newLI);
     newLI.innerText = getScores;
 })
 
+// if question.answer = 
 
