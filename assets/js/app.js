@@ -113,23 +113,43 @@ gameOver = () => {
 const input = document.querySelector('input')
 const scoreOL = document.getElementById('quiz-scores')
 const highScores = document.getElementById('score-link')
+// let getScores = localStorage.getItem('scores')
 
 // This function adds the scores to local storage.
+let scores = [];
+let getScores = localStorage.getItem('scores')
+let scoresArray = JSON.parse(getScores);
+
 submitBtn.addEventListener ('click', function(){
-    let scoreInput = document.getElementById('initials-score').value;
-    localStorage.setItem('scores',(scoreInput));
-    
+    let scoreInput = document.getElementById('initials-score').value
+    scores.push(scoreInput);
+    let scoreString = JSON.stringify(scores);
+    // let savedScores = 
+    localStorage.setItem('scores', scoreString);
+    // getNewScores();
     console.log(`Thanks for submitting your scores! Your score will be logged as ${scoreInput}`);
+    
 })
 
 // This function will retrieve the scores from local storage.
 highScores.addEventListener ('click', function () {
-    let getScores = localStorage.getItem('scores');
-    console.log(getScores);
-    let newLI = document.createElement('li');
-    scoreOL.appendChild(newLI);
-    newLI.innerText = getScores;
+   getNewScores();
 })
 
-// if question.answer = 
+getNewScores = () => {
+    console.log(getScores);
 
+    for (let i = 0; i < scoresArray.length; i++) {
+        let scoresLI = document.createElement('li');
+        scoreOL.appendChild(scoresLI);
+        scoresLI.innerText = scoresArray[i];
+    }
+    
+}
+
+// ??????
+if (scoresArray) {
+    let scores = scoresArray;
+} else {
+    let scores = []
+}
