@@ -4,6 +4,10 @@ header {
     font-size: 1rem;
 }
 
+body {
+    margin: 35px;
+}
+
 a {
     padding-top: 10px;
     font-size: 1.25rem;
@@ -56,27 +60,29 @@ input {
   padding: 10px;
 }
 
-#answers {
+#answers li {
     font-size: 1.5rem;
+}
+
+.ansBtns {
+    display: block;
+    margin: 10px;
+    background-color: cyan;
+    font-weight: bold;
+    font-size: 1.25rem;
+    border-radius: 0.3em;
 }
 
 #submit {
     margin-left: 10px;
 }
 
-.li-answer {
+/* .li-answer {
     margin: 10px 0;
     font-weight: bold;
-}
+} */
 
-.buttons {
-    background-color: cyan;
-    font-weight: bold;
-    font-size: 1.25rem;
-    border-radius: 2em;
-}
-
-.buttons:hover {
+button:hover {
     background-color: white;
 }
 
@@ -87,5 +93,4 @@ input {
 #quiz-scores {
     width: 10%;
     margin: 10px auto;
-
 }

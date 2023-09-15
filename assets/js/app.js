@@ -9,7 +9,7 @@ let timeLeft = 30;
 
 timerCountdown = () => {
         let countdownInterval = setInterval(function() {
-        console.log(timeLeft);
+        // console.log(timeLeft);
         timeLeft--;
         timerDisplay.innerHTML = `Timer: ${timeLeft}`;
 
@@ -19,7 +19,7 @@ timerCountdown = () => {
             console.log('Time is up!')
             gameOver();
         } else { 
-            console.log('Keep going!')
+            // console.log('Keep going!')
         }
     }, 1000);
 }
@@ -81,28 +81,51 @@ const answerOL = document.querySelector('#answers');
 
 const questionTxt = document.querySelector('#question-txt')
 
+let answerBtns = document.querySelectorAll('.ansBtns');
+
+// I was able to get an event listener on the first button, but not all buttons from the query selector statement.  Credit for this code goes to the author of the following site: https://www.codeinwp.com/snippets/add-event-listener-to-multiple-elements-with-javascript/#gref
+createBtnListener = () => {
+    answerBtns.forEach(function(i) {
+        i.addEventListener('click', function(e) {
+            console.log(e);
+        })
+    })
+}
+
+
 // This function will generate an ordered list using the question arrays.
 questionGen = () => {
     randomizeQst();
     questionTxt.innerHTML = randomQ.question;
     console.log(randomQ)
+    createBtnListener(); 
+      // This will generate an array using the values of the object.  The index of the array can then be used to generate the text in the list items.
+      let objValues = Object.values(randomQ);
+
 
 // This needs to be debugged.  It generates random questions, but appeneds the answers in a growing list.  The list elements need to be rewritten.  
-    for (i = 0; i < 4; i++) {
-            let newLI = document.createElement('li');
-            let newBtn = document.createElement('button')
+    for (let i = 0; i < 4; i++) {
+            // let newLI = document.createElement('li');
+            // let newBtn = document.createElement('button')
 
-            // This will generate an array using the values of the object.  The index of the array can then be used to generate the text in the list items.
-            let values = Object.values(randomQ);
+            let newLI = document.getElementById(`ans${i+1}`);
+            console.log(newLI)
+
+          
+            newLI.innerText = objValues[i+1]
             
-            answerOL.appendChild(newLI);
-            newLI.setAttribute('class', 'li-answer')
-            newLI.appendChild(newBtn);
+            // answerOL.appendChild(newLI);
+            // newLI.setAttribute('class', 'li-answer')
+            // newLI.appendChild(newBtn);
 
             // This was changed to use the values variable defined above that includes the array generated from the object.
-            newBtn.innerText = values[i + 1];
-            newBtn.setAttribute('class', 'buttons');
+            // newBtn.innerText = values[i + 1];
+            // newBtn.setAttribute('class', 'buttons');
+
+
         }
+        console.log(objValues);
+    
 }
 
 // This function will trigger a message when the timer reaches zero or all questions have been exhausted.  The function is called in the if statement of the interval timer countdown function.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
