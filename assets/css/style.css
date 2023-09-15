@@ -13,9 +13,9 @@ a {
     font-size: 1.25rem;
 }
 
-/* #timer {
-    font-size: 1.5rem;
-} */
+#answers {
+    /* display: none; */
+}
 
 h1 {
     font-size: 2rem;

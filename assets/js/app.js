@@ -4,6 +4,10 @@ const startQuiz = document.querySelector('#start-btn');
 const introParagraph = document.querySelector('#intro')
 const timerDisplay = document.querySelector('#timer');
 const docMain = document.querySelector('main')
+const answerOL = document.querySelector('#answers');
+
+// This hides the answserOL when the page first loads.  Properties and their corresponding values for many statements were pulled through the console using the console.dir(name of variable command).
+let hideOL = answerOL.hidden = true;
 
 let timeLeft = 30;
 
@@ -13,7 +17,7 @@ timerCountdown = () => {
         timeLeft--;
         timerDisplay.innerHTML = `Timer: ${timeLeft}`;
 
-        // This comparison operator had to be updated to less than or equals to due to a bug when decrementing time.  If a wrong answer was given and time was subtracted to a value below zero, the clock would run indefinitely.
+        // This comparison operator had to be updated to less than or equals due to a bug when decrementing time.  If a wrong answer was given and time was subtracted to a value below zero, the clock would run indefinitely.
         if (timeLeft <= 0) {
             clearInterval(countdownInterval);
             console.log('Time is up!')
@@ -31,9 +35,14 @@ startQuiz.addEventListener('click', function() {
     startQuiz.remove() & introParagraph.remove();
     timerCountdown();
     questionGen();
+    displayAnswerOL();
     // correctDisplay.remove();
 })
 
+// This function sets the hidden property of the answerOL to false to display the possible answers.
+displayAnswerOL = () => {
+    answerOL.hidden = false;
+}
 // Answering question triggers next question.
 
 // If question answered incorrectly time subtracted from clock.
@@ -78,7 +87,7 @@ randomizeQst = () => {
 }
 
 // This section establishes variables for use in the functions. A variable for the ordered list (answerOL) to be called in the questionGen function to append child list items.  The h1 used to display questions is also defined (questionTxt).
-const answerOL = document.querySelector('#answers');
+
 
 const questionTxt = document.querySelector('#question-txt')
 
@@ -135,6 +144,7 @@ let answerBtns = document.querySelectorAll('.ansBtns');
 createBtnListener = () => {
     answerBtns.forEach(function(i) {
         i.addEventListener('click', function(e) {
+            console.dir(e.target);
             let answerClicked = e.target.outerText;
             console.log(answerClicked);
             answer = answerClicked;
