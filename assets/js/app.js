@@ -5,7 +5,7 @@ const introParagraph = document.querySelector('#intro')
 const timerDisplay = document.querySelector('#timer');
 const docMain = document.querySelector('main')
 
-let timeLeft = 2;
+let timeLeft = 30;
 
 timerCountdown = () => {
         let countdownInterval = setInterval(function() {
@@ -40,9 +40,25 @@ startQuiz.addEventListener('click', function() {
 // Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in arrays. The actual question will always use the index of 0.
 
 // An index with the answer needs to be added to each array.
-const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
+// const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
 
-const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
+const q1 = {
+    question: 'What is the difference between an ol and ul element?', 
+    false1: 'Nothing they are the same.',
+    false2: 'An ol does not use numbers but a ul does.',
+    true: 'An ol uses numbers but a ul does not.',
+    false3: 'They both do not use numbers.',
+}
+
+// const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
+
+const q2 = {
+    question: 'Which method would we use to add a class to a newly created element?',
+    false1: '.addclass',
+    false2: '.addAttribute',
+    false3: '.setClass',
+    true: '.setAttribute',
+}
 
 // This controls the randomization.  The value needs to be updated as questions are added.
 const numQuestions = 2
@@ -68,23 +84,27 @@ const questionTxt = document.querySelector('#question-txt')
 // This function will generate an ordered list using the question arrays.
 questionGen = () => {
     randomizeQst();
-    questionTxt.innerHTML = randomQ[0];
+    questionTxt.innerHTML = randomQ.question;
     console.log(randomQ)
 
 // This needs to be debugged.  It generates random questions, but appeneds the answers in a growing list.  The list elements need to be rewritten.  
     for (i = 0; i < 4; i++) {
             let newLI = document.createElement('li');
             let newBtn = document.createElement('button')
-            // newLI.innerText = q1[i + 1];
+
+            // This will generate an array using the values of the object.  The index of the array can then be used to generate the text in the list items.
+            let values = Object.values(randomQ);
+            
             answerOL.appendChild(newLI);
             newLI.setAttribute('class', 'li-answer')
             newLI.appendChild(newBtn);
-            newBtn.innerText = randomQ[i + 1];
+
+            // This was changed to use the values variable defined above that includes the array generated from the object.
+            newBtn.innerText = values[i + 1];
             newBtn.setAttribute('class', 'buttons');
         }
 }
 
-// Form element to output score.
 // This function will trigger a message when the timer reaches zero or all questions have been exhausted.  The function is called in the if statement of the interval timer countdown function.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
 const submitBtn = document.createElement('button')
 
@@ -114,11 +134,11 @@ const input = document.querySelector('input')
 const scoreOL = document.getElementById('quiz-scores')
 const highScores = document.getElementById('score-link')
 
-// This function adds the scores to local storage.
+// The following functions and variables are used to add the scores to local storage.
 let scores = [];
 let getScores = JSON.parse(localStorage.getItem('scores'))
 
-// This functions became necessary after evaluating the first run through a quiz without any pre-existing scores in local storage.  The new array created would always add a value of null to the array in these cases.  This function has been added to the submit button listener.
+// This function became necessary after evaluating the first run through a quiz without any pre-existing scores in local storage.  The new array created would always add a value of null to the array in these cases.  This function has been added to the submit button listener.
 checkScores = () => {
     let storageCheck = localStorage.getItem('scores')
     if (storageCheck === null || storageCheck === 'undefined') {
@@ -128,7 +148,7 @@ checkScores = () => {
     }
 }
 
-// This function was added to the user's input after submitting their initials and score.  It's called within the submit button listener event.
+// This function was added to clear the user's input after submitting their initials and score.  It's called within the submit button listener event.
 clearForm = () => {
     document.querySelector('form').reset()
 }
@@ -161,8 +181,7 @@ cleanScoreOL = () => {
     let childCount = scoreOL.childElementCount;
     for (let i = 1; i < childCount; i++) {
         scoreOL.removeChild(i);
-    }
-        
+    }   
 }
 
 let getNewScores = () => {
