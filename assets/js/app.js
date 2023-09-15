@@ -117,17 +117,29 @@ const highScores = document.getElementById('score-link')
 // This function adds the scores to local storage.
 let scores = [];
 let getScores = JSON.parse(localStorage.getItem('scores'))
-// let scoresArray = JSON.parse(getScores);
+
+checkScores = () => {
+    let scoreCheck = localStorage.getItem('scores')
+    if (scoreCheck === null || scoreCheck === 'undefined') {
+        return getScores =[];
+    } else {
+        return getScores;
+    }
+}
 
 submitBtn.addEventListener ('click', function(e){
     let scoreInput = document.getElementById('initials-score').value
     scores.push(scoreInput);
+
+    // This needs an if statment because if there are no scores currently in storage it will return null.
+    checkScores();
     let newScoreArray = scores.concat(getScores);
     e.preventDefault();
     console.log(e);
     let scoreString = JSON.stringify(newScoreArray);
     localStorage.setItem('scores', scoreString);
-    input = " "
+    // input = " "
+
 
     // let scoreString = JSON.stringify(scores);
     // // let savedScores = 
@@ -153,12 +165,12 @@ getNewScores = () => {
     let getScores = JSON.parse(localStorage.getItem('scores'))
     // let scoresArray = JSON.parse(getScores);
     console.log(getScores);
-}
 
     for (let i = 0; i < getScores.length; i++) {
         let scoresLI = document.createElement('li');
         scoreOL.appendChild(scoresLI);
         scoresLI.innerText = getScores[i];
+    
     }
-
+}
 
