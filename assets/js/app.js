@@ -128,6 +128,12 @@ checkScores = () => {
     }
 }
 
+// This function was added to the user's input after submitting their initials and score.  It's called within the submit button listener event.
+clearForm = () => {
+    document.querySelector('form').reset()
+}
+
+// This function executes numerous statements when the event is triggered after clicking the submit button.  The value is retrieved from the input field and added to the scores array.  The state of local storage is then checked to see if there is any existing data using the checkScores function defined earlier.  A new array is then generated for storage by concatenating the scores array with the values retrieved from storage, if any.  The new array is then rewrittent storage by stringifying the result.  Finally, the form is cleared to remove the user's previous input values.
 submitBtn.addEventListener ('click', function(e){
     let scoreInput = document.getElementById('initials-score').value
     scores.push(scoreInput);
@@ -138,6 +144,7 @@ submitBtn.addEventListener ('click', function(e){
     console.log(e);
     let scoreString = JSON.stringify(newScoreArray);
     localStorage.setItem('scores', scoreString);
+    clearForm();
     console.log(`Thanks for submitting your scores! Your score will be logged as ${scoreInput}`);
     
 })
@@ -152,7 +159,7 @@ highScores.addEventListener ('click', function () {
 // This was added to address a bug where the score would continue to repeat and add list items indefinitely when the link was clicked.
 cleanScoreOL = () => {
     let childCount = scoreOL.childElementCount;
-    for (let i =0; i < childCount; i++) {
+    for (let i = 1; i < childCount; i++) {
         scoreOL.removeChild(i);
     }
         
