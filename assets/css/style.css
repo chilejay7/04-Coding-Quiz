@@ -5,7 +5,7 @@ header {
 }
 
 body {
-    margin: 35px;
+    padding: 35px;
 }
 
 a {
@@ -84,6 +84,11 @@ input {
 
 button:hover {
     background-color: white;
+}
+
+.nextBtn {
+    margin-left: 80%;
+    background-color: cyan;
 }
 
 #quiz-scores li {

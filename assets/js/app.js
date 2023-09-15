@@ -13,8 +13,8 @@ timerCountdown = () => {
         timeLeft--;
         timerDisplay.innerHTML = `Timer: ${timeLeft}`;
 
-        // An or statement can be added here if all questions have been answered.
-        if (timeLeft === 0) {
+        // This comparison operator had to be updated to less than or equals to due to a bug when decrementing time.  If a wrong answer was given and time was subtracted to a value below zero, the clock would run indefinitely.
+        if (timeLeft <= 0) {
             clearInterval(countdownInterval);
             console.log('Time is up!')
             gameOver();
@@ -31,13 +31,14 @@ startQuiz.addEventListener('click', function() {
     startQuiz.remove() & introParagraph.remove();
     timerCountdown();
     questionGen();
+    // correctDisplay.remove();
 })
 
 // Answering question triggers next question.
 
 // If question answered incorrectly time subtracted from clock.
 
-// Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in arrays. The actual question will always use the index of 0.
+// Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in objects.
 
 // An index with the answer needs to be added to each array.
 // const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
@@ -45,9 +46,9 @@ startQuiz.addEventListener('click', function() {
 const q1 = {
     question: 'What is the difference between an ol and ul element?', 
     false1: 'Nothing they are the same.',
-    false2: 'An ol does not use numbers but a ul does.',
-    true: 'An ol uses numbers but a ul does not.',
-    false3: 'They both do not use numbers.',
+    false2: 'An ul creates a numbered list.',
+    true: 'An ol creates a numbered list but a ul does not.',
+    false3: 'Neither is a list.',
 }
 
 // const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
@@ -81,17 +82,7 @@ const answerOL = document.querySelector('#answers');
 
 const questionTxt = document.querySelector('#question-txt')
 
-let answerBtns = document.querySelectorAll('.ansBtns');
-
-// I was able to get an event listener on the first button, but not all buttons from the query selector statement.  Credit for this code goes to the author of the following site: https://www.codeinwp.com/snippets/add-event-listener-to-multiple-elements-with-javascript/#gref
-createBtnListener = () => {
-    answerBtns.forEach(function(i) {
-        i.addEventListener('click', function(e) {
-            console.log(e);
-        })
-    })
-}
-
+const correctDisplay = document.querySelector('#correct')
 
 // This function will generate an ordered list using the question arrays.
 questionGen = () => {
@@ -99,33 +90,57 @@ questionGen = () => {
     questionTxt.innerHTML = randomQ.question;
     console.log(randomQ)
     createBtnListener(); 
+
       // This will generate an array using the values of the object.  The index of the array can then be used to generate the text in the list items.
       let objValues = Object.values(randomQ);
+      let objKeys = Object.keys(randomQ);
 
 
 // This needs to be debugged.  It generates random questions, but appeneds the answers in a growing list.  The list elements need to be rewritten.  
     for (let i = 0; i < 4; i++) {
-            // let newLI = document.createElement('li');
-            // let newBtn = document.createElement('button')
-
+           
+            // Using +1 is required here because there is no list element named ans0.  If left as i with the value of i defined as 0 above, the console will log an error.
             let newLI = document.getElementById(`ans${i+1}`);
             console.log(newLI)
-
-          
-            newLI.innerText = objValues[i+1]
             
-            // answerOL.appendChild(newLI);
-            // newLI.setAttribute('class', 'li-answer')
-            // newLI.appendChild(newBtn);
-
-            // This was changed to use the values variable defined above that includes the array generated from the object.
-            // newBtn.innerText = values[i + 1];
-            // newBtn.setAttribute('class', 'buttons');
-
-
+            // +1 is used to skip the question since it has an index of 0 in the array and I do not want it to be used as an item in the list.
+            newLI.innerText = objValues[i+1]
         }
-        console.log(objValues);
-    
+    console.log(objValues);
+    console.log(objKeys);
+}
+
+
+// The function below establishes an empty answer variable that can be used to hold the value of the event.target.outerText.  This value is then compared against the array's true key.  The correctAnswer function is incorporated into the event listener for the buttons.
+let answer = ""
+
+correctAnswer = () => {
+    if (answer == randomQ.true) {
+        correctDisplay.innerText = 'Correct!'
+    } else {
+        correctDisplay.innerText = 'Wrong!'
+        // A statement was added to decrement the timer with a wrong answer.
+        timeLeft -= 10;
+    }
+// Statements were added to create a next button for use when moving to a new question.
+    let newBtn = document.createElement('button')
+    correctDisplay.append(newBtn); 
+    newBtn.setAttribute('class', 'nextBtn');
+    newBtn.innerText = 'Next Question'
+}
+
+// The function below uses a click event listener to determine if the answer is correct or false.
+let answerBtns = document.querySelectorAll('.ansBtns');
+
+createBtnListener = () => {
+    answerBtns.forEach(function(i) {
+        i.addEventListener('click', function(e) {
+            let answerClicked = e.target.outerText;
+            console.log(answerClicked);
+            answer = answerClicked;
+            correctAnswer();
+        })
+    })
 }
 
 // This function will trigger a message when the timer reaches zero or all questions have been exhausted.  The function is called in the if statement of the interval timer countdown function.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
@@ -133,6 +148,7 @@ const submitBtn = document.createElement('button')
 
 gameOver = () => {
     answerOL.remove();
+    correctDisplay.remove();
     questionTxt.innerHTML = 'Sorry, the quiz is over.'
     let newForm = document.createElement('form');
     let newInput = document.createElement('input');
