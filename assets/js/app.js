@@ -102,8 +102,8 @@ gameOver = () => {
     newForm.appendChild(submitBtn);
     newLabel.innerText = 'Initials and Final Score'
     newLabel.setAttribute('for', 'initials-score');
-    newInput.setAttribute('type', 'text');
     newInput.setAttribute('id', 'initials-score');
+    newInput.setAttribute('type', 'text');
     newInput.setAttribute('placeholder', 'Initials & Score');
     submitBtn.innerText = 'Submit';
     submitBtn.setAttribute('id', 'submit');
@@ -118,9 +118,10 @@ const highScores = document.getElementById('score-link')
 let scores = [];
 let getScores = JSON.parse(localStorage.getItem('scores'))
 
+// This functions became necessary after evaluating the first run through a quiz without any pre-existing scores in local storage.  The new array created would always add a value of null to the array in these cases.  This function has been added to the submit button listener.
 checkScores = () => {
-    let scoreCheck = localStorage.getItem('scores')
-    if (scoreCheck === null || scoreCheck === 'undefined') {
+    let storageCheck = localStorage.getItem('scores')
+    if (storageCheck === null || storageCheck === 'undefined') {
         return getScores =[];
     } else {
         return getScores;
@@ -131,40 +132,34 @@ submitBtn.addEventListener ('click', function(e){
     let scoreInput = document.getElementById('initials-score').value
     scores.push(scoreInput);
 
-    // This needs an if statment because if there are no scores currently in storage it will return null.
     checkScores();
     let newScoreArray = scores.concat(getScores);
     e.preventDefault();
     console.log(e);
     let scoreString = JSON.stringify(newScoreArray);
     localStorage.setItem('scores', scoreString);
-    // input = " "
-
-
-    // let scoreString = JSON.stringify(scores);
-    // // let savedScores = 
-    // localStorage.setItem('scores', scoreString);
-    // getNewScores();
-    // storeScores();
     console.log(`Thanks for submitting your scores! Your score will be logged as ${scoreInput}`);
     
 })
 
-// storeScores = () => {
-//     let scoreString = JSON.stringify(newScoreArray);
-//     localStorage.setItem('scores', scoreString);
-// }
 
-// This function will retrieve the scores from local storage.
+// This function will retrieve the scores from local storage when the view high scores link is clicked.
 highScores.addEventListener ('click', function () {
-   getNewScores();
+    cleanScoreOL();
+    getNewScores();
 })
 
-getNewScores = () => {
-    // let getScores = localStorage.getItem('scores')
+// This was added to address a bug where the score would continue to repeat and add list items indefinitely when the link was clicked.
+cleanScoreOL = () => {
+    let childCount = scoreOL.childElementCount;
+    for (let i =0; i < childCount; i++) {
+        scoreOL.removeChild(i);
+    }
+        
+}
+
+let getNewScores = () => {
     let getScores = JSON.parse(localStorage.getItem('scores'))
-    // let scoresArray = JSON.parse(getScores);
-    console.log(getScores);
 
     for (let i = 0; i < getScores.length; i++) {
         let scoresLI = document.createElement('li');
@@ -173,4 +168,3 @@ getNewScores = () => {
     
     }
 }
-
