@@ -45,31 +45,61 @@ displayAnswerOL = () => {
 // Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in objects.
 
 const q1 = {
-    question: 'What is the difference between an ol and ul element?', 
-    false1: 'Nothing they are the same.',
-    false2: 'An ul creates a numbered list.',
-    true: 'An ol creates a numbered list but a ul does not.',
-    false3: 'Neither is a list.',
+    question: 'Which is not a primitive data type?', 
+    false1: 'Number',
+    false2: 'Boolean',
+    true: 'Object',
+    false3: 'All of the above are primitive types.',
 }
 
 const q2 = {
-    question: 'Which method would we use to add a class to a newly created element?',
-    false1: '.addclass',
-    false2: '.addAttribute',
-    false3: '.setClass',
-    true: '.setAttribute',
+    question: 'What is the difference between the == and === operators?',
+    false1: `== tests for type and value while === tests for type`,
+    false2: 'They are the same.',
+    false3: `== assigns a value while === tests for equality`,
+    true: `== test for type while === test for type and value`,
+}
+
+const q3 = {
+    question: 'Which of the following are logical operators?',
+    false1: '||',
+    false2: '&&',
+    false3: '>',
+    true: 'Both 1 and 2',
+}
+
+const q4 = {
+    question: 'What does the NaN property signify?',
+    true: 'Shows a value is not a legal number',
+    false2: 'Indicates a value is not equal',
+    false3: 'States a value is not defined',
+    false4: 'Invalid syntax',
+}
+
+const q5 = {
+    question: 'Is an object iterable in JavaScript?',
+    false1: 'Yes',
+    true: 'No',
+    false3: `I don't know`,
+    false4: 'Aboslutely',
 }
 
 // This controls the randomization.  The value needs to be updated as questions are added.
-const numQuestions = 2
+const numQuestions = 5
 
 // This function randomizes the question selected based on the arrays above.  This could be done more elegantly if all question objects were placed in one array and saved to variable.  This could be incorporated in future iterations.
 randomizeQst = () => {
     let rand = Math.floor(Math.random() * numQuestions + 1);
-    if (rand === 2) {
-        randomQ = q2
-    } else {
+    if (rand === 1) {
         randomQ = q1
+    } else if (rand === 2) {
+        randomQ = q2
+    } else if (rand === 3) {
+        randomQ = q3
+    }else if (rand === 4) {
+        randomQ = q4
+    } else if (rand === 5) {
+        randomQ = q5
     }
     return randomQ;
 }
