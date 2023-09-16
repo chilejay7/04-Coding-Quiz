@@ -188,9 +188,7 @@ gameOver = () => {
     let newForm = document.createElement('form');
     let newInput = document.createElement('input');
     let newLabel = document.createElement('label')
-    // let submitBtn = document.createElement('button');
     docMain.appendChild(newForm);
-    // newForm.setAttribute('action', '/score')
     newForm.appendChild(newLabel);
     newForm.appendChild(newInput);
     newForm.appendChild(submitBtn);
@@ -267,7 +265,6 @@ let getNewScores = () => {
         let scoresLI = document.createElement('li');
         scoreOL.appendChild(scoresLI);
         scoresLI.innerText = getScores[i];
-    
     }
 }
 
