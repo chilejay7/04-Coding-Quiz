@@ -271,6 +271,7 @@ let getNewScores = () => {
 // The following code allows users to restart the quiz by refreshing the page if they would like to do so.
 restartQuiz.addEventListener('click', function(e) {
     reloadQuiz();
+    scoreOL.hidden = true;
 })
 
 reloadQuiz = () => {
