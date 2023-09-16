@@ -1,5 +1,3 @@
-// Create buttons in html document and add listeners.
-
 const startQuiz = document.querySelector('#start-btn');
 const introParagraph = document.querySelector('#intro')
 const timerDisplay = document.querySelector('#timer');
@@ -43,14 +41,8 @@ startQuiz.addEventListener('click', function() {
 displayAnswerOL = () => {
     answerOL.hidden = false;
 }
-// Answering question triggers next question.
-
-// If question answered incorrectly time subtracted from clock.
 
 // Generate random questions.  Four potential answers with buttons to select answer.  This is an ol to generate the four button elements with possible answers.  Questions and their answers can be placed in objects.
-
-// An index with the answer needs to be added to each array.
-// const q1 = ['What is the difference between an ol and ul element?', 'Nothing they are the same.', 'An ol does not use numbers but a ul does.', 'An ol uses numbers but a ul does not.', 'They both do not use numbers.']
 
 const q1 = {
     question: 'What is the difference between an ol and ul element?', 
@@ -59,8 +51,6 @@ const q1 = {
     true: 'An ol creates a numbered list but a ul does not.',
     false3: 'Neither is a list.',
 }
-
-// const q2 = ['Which method would we use to add a class to a newly created element?', '.addclass', '.addAttribute', '.setClass', '.setAttribute']
 
 const q2 = {
     question: 'Which method would we use to add a class to a newly created element?',
@@ -73,11 +63,9 @@ const q2 = {
 // This controls the randomization.  The value needs to be updated as questions are added.
 const numQuestions = 2
 
-// This function randomizes the question selected based on the arrays above.
+// This function randomizes the question selected based on the arrays above.  This could be done more elegantly if all question objects were placed in one array and saved to variable.  This could be incorporated in future iterations.
 randomizeQst = () => {
-    // let liDel = document.querySelectorAll('li').remove();
     let rand = Math.floor(Math.random() * numQuestions + 1);
-    // randomQ = `q${rand}`;
     if (rand === 2) {
         randomQ = q2
     } else {
@@ -87,7 +75,6 @@ randomizeQst = () => {
 }
 
 // This section establishes variables for use in the functions. A variable for the ordered list (answerOL) to be called in the questionGen function to append child list items.  The h1 used to display questions is also defined (questionTxt).
-
 
 const questionTxt = document.querySelector('#question-txt')
 
@@ -119,7 +106,6 @@ questionGen = () => {
     console.log(objKeys);
 }
 
-
 // The function below establishes an empty answer variable that can be used to hold the value of the event.target.outerText.  This value is then compared against the array's true key.  The correctAnswer function is incorporated into the event listener for the buttons.
 let answer = ""
 
@@ -144,11 +130,7 @@ correctAnswer = () => {
         questionGen();
         correctDisplay.hidden = true
     })
-
-    
 }
-
-
 
 // The function below uses a click event listener to determine if the answer is correct or false.
 let answerBtns = document.querySelectorAll('.ansBtns');
@@ -167,6 +149,7 @@ createBtnListener = () => {
 
 // This function will trigger a message when the timer reaches zero or all questions have been exhausted.  The function is called in the if statement of the interval timer countdown function.  It removes the ordered list items containing the answer options and rewrites the h1 containing the question (questionTxt).  New form, label, and input elements are created.
 const submitBtn = document.createElement('button')
+const restartQuiz = document.createElement('button')
 
 gameOver = () => {
     answerOL.remove();
@@ -188,6 +171,9 @@ gameOver = () => {
     newInput.setAttribute('placeholder', 'Initials & Score');
     submitBtn.innerText = 'Submit';
     submitBtn.setAttribute('id', 'submit');
+    docMain.appendChild(restartQuiz);
+    restartQuiz.innerText = 'Restart Quiz'
+    restartQuiz.setAttribute('id', 'restartQuiz')
  }
 
 // Tracking scores.  A submit button was created in the gameOver function.  The input from the form will be captured to store in the scores array.  Local storage is needed to store data in the user's browser.  This is accomplished through the window.  A separate function will be used to retrieve it through the View High Scores link.
@@ -230,7 +216,6 @@ submitBtn.addEventListener ('click', function(e){
     
 })
 
-
 // This function will retrieve the scores from local storage when the view high scores link is clicked.
 highScores.addEventListener ('click', function () {
     cleanScoreOL();
@@ -255,3 +240,13 @@ let getNewScores = () => {
     
     }
 }
+
+// The following code allows users to restart the quiz by refreshing the page if they would like to do so.
+restartQuiz.addEventListener('click', function(e) {
+    reloadQuiz();
+})
+
+reloadQuiz = () => {
+    location.reload();
+}
+

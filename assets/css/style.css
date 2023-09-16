@@ -1,3 +1,7 @@
+:root {
+    --btn-bg: #00ccffd8;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -11,10 +15,6 @@ body {
 a {
     padding-top: 10px;
     font-size: 1.25rem;
-}
-
-#answers {
-    /* display: none; */
 }
 
 h1 {
@@ -51,7 +51,7 @@ input {
 
 #start-btn {
   align-items: center;
-  background-color: #00ccffd8;
+  background-color: var(--btn-bg);
   font-size: 1.25rem;
   font-weight: bold;
   border: 2px solid black;
@@ -67,7 +67,7 @@ input {
 .ansBtns {
     display: block;
     margin: 10px;
-    background-color: cyan;
+    background-color: var(--btn-bg);
     font-weight: bold;
     font-size: 1.25rem;
     border-radius: 0.3em;
@@ -75,12 +75,11 @@ input {
 
 #submit {
     margin-left: 10px;
+    background-color: var(--btn-bg);
+    &:hover{
+        background-color: white;
+    }
 }
-
-/* .li-answer {
-    margin: 10px 0;
-    font-weight: bold;
-} */
 
 button:hover {
     background-color: white;
@@ -88,7 +87,7 @@ button:hover {
 
 .nextBtn {
     margin-left: 80%;
-    background-color: cyan;
+    background-color: var(--btn-bg);
 }
 
 #quiz-scores li {
@@ -98,4 +97,12 @@ button:hover {
 #quiz-scores {
     width: 10%;
     margin: 10px auto;
+}
+
+#restartQuiz {
+    background-color: var(--btn-bg);
+
+    &:hover{
+        background-color: white;
+    }
 }
