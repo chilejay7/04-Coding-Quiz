@@ -10,7 +10,7 @@ https://chilejay7.github.io/04-Coding-Quiz/
 
 ## Usage
 
-A screenshot of the website design is included below for reference.  Clicking the Start button will start the timer and countdown until there is no time left.  The first question will be presented after clicking Start.  Thirty secoonds will be given to answer as many of the questions as possible.  Each incorrect answer will subtract ten seconds from the time available.  At the end of the time the user will be able save their initials and score. All score data is saved to local storage and can be recalled at any time by using the View High Scores link at the top of the page.
+A screenshot of the website design is included below for reference.  Clicking the Start button will start the timer and countdown until there is no time left.  The first question will be presented after clicking Start.  A set amount of time will be given to answer as many of the questions as possible.  Each incorrect answer will subtract ten seconds from the time available.  At the end of the time the user will be able save their initials and score. All score data is saved to local storage and can be recalled at any time by using the View High Scores link at the top of the page.
 
 ![alt text](./assets/images/CodingQuiz.png)
 

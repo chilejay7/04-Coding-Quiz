@@ -7,7 +7,7 @@ const answerOL = document.querySelector('#answers');
 // This hides the answserOL when the page first loads.  Properties and their corresponding values for many statements were pulled through the console using the console.dir(name of variable command).
 let hideOL = answerOL.hidden = true;
 
-let timeLeft = 30;
+let timeLeft = 45;
 
 timerCountdown = () => {
         let countdownInterval = setInterval(function() {
