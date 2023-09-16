@@ -124,6 +124,7 @@ questionGen = () => {
 let answer = ""
 
 correctAnswer = () => {
+    correctDisplay.hidden = false;
     if (answer == randomQ.true) {
         correctDisplay.innerText = 'Correct!'
     } else {
@@ -136,7 +137,18 @@ correctAnswer = () => {
     correctDisplay.append(newBtn); 
     newBtn.setAttribute('class', 'nextBtn');
     newBtn.innerText = 'Next Question'
+
+    let nextBtn = document.querySelector('.nextBtn') 
+    nextBtn.addEventListener('click', function(e){
+        console.dir(e.target);
+        questionGen();
+        correctDisplay.hidden = true
+    })
+
+    
 }
+
+
 
 // The function below uses a click event listener to determine if the answer is correct or false.
 let answerBtns = document.querySelectorAll('.ansBtns');
@@ -144,8 +156,8 @@ let answerBtns = document.querySelectorAll('.ansBtns');
 createBtnListener = () => {
     answerBtns.forEach(function(i) {
         i.addEventListener('click', function(e) {
-            console.dir(e.target);
-            let answerClicked = e.target.outerText;
+            // console.dir(e.target);
+            let answerClicked = e.target.innerText;
             console.log(answerClicked);
             answer = answerClicked;
             correctAnswer();
