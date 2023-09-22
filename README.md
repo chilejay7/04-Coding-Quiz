@@ -1,4 +1,4 @@
-# 04-Coding-Quiz
+# Coding Quiz Study Application
 
 ## Description
 
